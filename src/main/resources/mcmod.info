@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "rodcolor",
+    "name": "Rod Color",
+    "description": "Customize the rod string color.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Revxrsal"
+    ],
+    "credits": "Revxrsal",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "io.github.reflxction.rodcolor.mixins",
+  "refmap": "mixin.quake.refmap.json",
+  "verbose": true,
+  "mixins": [
+    "MixinRenderFish"
+  ]
+}
