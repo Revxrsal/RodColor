@@ -30,12 +30,16 @@ import net.minecraft.util.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import java.awt.*;
+
 import static io.github.reflxction.rodcolor.Settings.*;
 
 @Mixin(RenderFish.class)
 public class MixinRenderFish extends Render<EntityFishHook> {
 
     private static final ResourceLocation FISH_PARTICLES = new ResourceLocation("textures/particle/particles.png");
+
+    private static final float COLOR_DELTA = 2000.0F;
 
     protected MixinRenderFish(RenderManager renderManager) {
         super(renderManager);
@@ -101,11 +105,16 @@ public class MixinRenderFish extends Render<EntityFishHook> {
             GlStateManager.disableTexture2D();
             GlStateManager.disableLighting();
             worldrenderer.begin(3, DefaultVertexFormats.POSITION_COLOR);
-            int k = 16;
-
             for (int l = 0; l <= 16; ++l) {
                 float f10 = (float) l / 16.0F;
-                worldrenderer.pos(x + d9 * (double) f10, y + d11 * (double) (f10 * f10 + f10) * 0.5D + 0.25D, z + d12 * (double) f10).color(RED.get(), GREEN.get(), BLUE.get(), ALPHA.get()).endVertex();
+                if (CHROMA.get()) {
+                    long dif = (long) ((x * 10) - (y * 10));
+                    long color = System.currentTimeMillis() - dif;
+                    int i = Color.HSBtoRGB((float) (color % (int) COLOR_DELTA) / COLOR_DELTA, 0.8F, 0.8F);
+                    Color c = new Color(i);
+                    worldrenderer.pos(x + d9 * (double) f10, y + d11 * (double) (f10 * f10 + f10) * 0.5D + 0.25D, z + d12 * (double) f10).color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha()).endVertex();
+                } else
+                    worldrenderer.pos(x + d9 * (double) f10, y + d11 * (double) (f10 * f10 + f10) * 0.5D + 0.25D, z + d12 * (double) f10).color(RED.get(), GREEN.get(), BLUE.get(), ALPHA.get()).endVertex();
             }
 
             tessellator.draw();

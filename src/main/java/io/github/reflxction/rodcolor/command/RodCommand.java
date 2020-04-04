@@ -15,11 +15,11 @@
  */
 package io.github.reflxction.rodcolor.command;
 
+import io.github.reflxction.rodcolor.gui.ColorGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
-import io.github.reflxction.rodcolor.gui.ColorGUI;
 
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +66,7 @@ public class RodCommand implements ICommand {
             @Override public void run() {
                 Minecraft.getMinecraft().displayGuiScreen(new ColorGUI());
             }
-        }, 50);
+        }, 100);
     }
 
     /**

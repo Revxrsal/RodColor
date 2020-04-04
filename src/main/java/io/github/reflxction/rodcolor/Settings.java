@@ -21,13 +21,17 @@ package io.github.reflxction.rodcolor;
 public class Settings {
 
     /**
-     * RGB settings
+     * RGBA settings
      */
     public static final Setting<Integer> RED = new Setting<>("Red", 0);
     public static final Setting<Integer> GREEN = new Setting<>("Green", 0);
     public static final Setting<Integer> BLUE = new Setting<>("Blue", 0);
     public static final Setting<Integer> ALPHA = new Setting<>("Alpha", 255);
 
+    /**
+     * Whether is the color chroma or not
+     */
+    public static final Setting<Boolean> CHROMA = new Setting<>("Chroma", false);
 
     /**
      * Represents a setting
@@ -94,7 +98,7 @@ public class Settings {
          *
          * @param value Value to set
          */
-        public void set(T value) {
+        public T set(T value) {
             this.value = value;
             if (value instanceof Boolean)
                 RodColor.getConfig().get(category, configName, (Boolean) defaultValue).set((Boolean) value);
@@ -106,6 +110,8 @@ public class Settings {
                 RodColor.getConfig().get(category, configName, (String) defaultValue).set((String) value);
             else
                 RodColor.getConfig().get(category, configName, defaultValue.toString()).set(value.toString());
+            return value;
+
         }
     }
 }
